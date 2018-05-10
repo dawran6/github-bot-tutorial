@@ -22,7 +22,7 @@ async def main(request):
     body = await request.read()
 
     secret = os.getenv('GH_SECRET')
-    oauth_token = os.getenv('GH_TOKEN')
+    oauth_token = os.getenv('GH_AUTH')
 
     event = sansio.Event.from_http(request.headers, body, secret=secret)
 
