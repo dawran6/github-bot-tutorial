@@ -18,6 +18,15 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     await gh.post(url, data={"body": message})
 
 
+@router.register('merged', action='closed')
+async def issue_merged_event(event, gh, *args, **kwargs):
+    url = event.data["issue"]["comments_url"]
+    author = event.data["issue"]["user"]["login"]
+
+    message = f"Thanks for the PR @{author}! (I'm a bot)."
+    await gh.post(url, data={"body": message})
+
+
 async def main(request):
     body = await request.read()
 
