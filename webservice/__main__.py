@@ -27,6 +27,12 @@ async def issue_merged_event(event, gh, *args, **kwargs):
     await gh.post(url, data={"body": message})
 
 
+@router.register('issue_comment', action='created')
+async def issue_commented_event(event, gh, *args, **kwargs):
+    url = event.data["comment"]["url"]
+    await gh.post(f'{url}/reactions', data={"content": '+1'})
+
+
 async def main(request):
     body = await request.read()
 
