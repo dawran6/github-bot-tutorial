@@ -30,7 +30,7 @@ async def issue_merged_event(event, gh, *args, **kwargs):
 @router.register('issue_comment', action='created')
 async def issue_commented_event(event, gh, *args, **kwargs):
     url = event.data["comment"]["url"]
-    await gh.post(f'{url}/reactions', data={"content": '+1'})
+    await gh.post(f'{url}/reactions', data={"content": '+1'}, accept='application/vnd.github.squirrel-girl-preview+json')
 
 
 async def main(request):
