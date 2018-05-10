@@ -9,6 +9,13 @@ from gidgethub import aiohttp as gh_aiohttp
 router = routing.Router()
 
 
+@router.register('pull_request', action='opened')
+async def issue_opened_event(event, gh, *args, **kwargs):
+    url = event.data["pull_request"]["comments_url"]
+
+    await gh.patch(url, data={"labels": 'need review'})
+
+
 @router.register('issues', action='opened')
 async def issue_opened_event(event, gh, *args, **kwargs):
     url = event.data["issue"]["comments_url"]
