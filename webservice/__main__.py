@@ -13,7 +13,7 @@ router = routing.Router()
 async def issue_opened_event(event, gh, *args, **kwargs):
     url = event.data["pull_request"]["url"]
 
-    await gh.patch(url, data={"labels": 'need review'})
+    await gh.patch(url, data={"labels": 'help wanted'})
 
 
 @router.register('issues', action='opened')
